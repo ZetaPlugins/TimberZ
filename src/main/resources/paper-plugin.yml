@@ -1,5 +1,5 @@
 name: TimberZ
-version: '${version}'
+version: '1.1.1'
 main: com.zetaplugins.timberz.TimberZ
 bootstrapper: com.zetaplugins.timberz.bootstrap.TimberZBootstrap
 api-version: '1.21'
