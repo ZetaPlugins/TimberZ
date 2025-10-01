@@ -12,3 +12,4 @@ noPermissionError: "&cУ вас недостаточно прав, чтобы и
 noTimberPermissionError: "&cУ вас недостаточно прав для использования TimberZ!"
 notEnoughDurability: "&cУ вашего топора слишком мало прочности!"
 noTimberInThisRegion: "&cВы не можете использовать TimberZ в этой области!"
+playerOnlyCommand: "&cЭта команда может быть вызвана только игроками!"
