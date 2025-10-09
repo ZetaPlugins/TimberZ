@@ -23,47 +23,21 @@
  * be treated as release mode.
  */
 
-
 plugins {
     id 'java'
     id("xyz.jpenilla.run-paper") version "2.3.1"
 }
 
 group = 'com.zetaplugins'
-version = '1.1.1'
+version = '1.1.2'
 
 repositories {
     mavenCentral()
-    maven {
-        name = "papermc-repo"
-        url = "https://repo.papermc.io/repository/maven-public/"
-    }
-    maven {
-        name = "sonatype"
-        url = "https://oss.sonatype.org/content/groups/public/"
-    }
-    maven {
-        url "https://maven.enginehub.org/repo/"
-    }
-    maven {
-        url = 'https://repo.extendedclip.com/releases/'
-    }
+    maven { name = "papermc-repo"; url = "https://repo.papermc.io/repository/maven-public/" }
+    maven { name = "sonatype"; url = "https://oss.sonatype.org/content/groups/public/" }
+    maven { url "https://maven.enginehub.org/repo/" }
+    maven { url = 'https://repo.extendedclip.com/releases/' }
 }
-
-dependencies {
-    compileOnly("io.papermc.paper:paper-api:1.21.5-R0.1-SNAPSHOT")
-    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.13'
-    compileOnly 'me.clip:placeholderapi:2.11.6'
-    compileOnly 'dev.aurelium:auraskills-api-bukkit:2.2.4'
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.16.1")
-}
-
-tasks.named("runServer") {
-    minecraftVersion("1.21.5")
-
-    jvmArgs += "-Dplugin.env=dev"
-}
-
 
 def targetJavaVersion = 21
 java {
@@ -77,7 +51,6 @@ java {
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
-
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release.set(targetJavaVersion)
     }
@@ -88,4 +61,52 @@ processResources {
     filesMatching("**/paper-plugin.yml") {
         expand version: project.version
     }
+}
+
+sourceSets {
+    main {
+        java.srcDirs = ['src/main/java']
+        resources.srcDirs = ['src/main/resources']
+    }
+    mc1214 {
+        java.srcDirs = ['src/mc1214/java']
+        resources.srcDirs = ['src/mc1214/resources']
+    }
+    mc1219 {
+        java.srcDirs = ['src/mc1219/java']
+        resources.srcDirs = ['src/mc1219/resources']
+    }
+}
+
+dependencies {
+    compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.13'
+    compileOnly 'me.clip:placeholderapi:2.11.6'
+    compileOnly 'dev.aurelium:auraskills-api-bukkit:2.2.4'
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.16.1"
+
+    compileOnly "io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"
+
+    mc1214CompileOnly "io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"
+    mc1219CompileOnly "io.papermc.paper:paper-api:1.21.9-R0.1-SNAPSHOT"
+
+    mc1214Implementation sourceSets.main.output
+    mc1219Implementation sourceSets.main.output
+}
+
+tasks.register('buildMC1214', Jar) {
+    archiveClassifier = '1.21.4'
+    from sourceSets.mc1214.output
+    from sourceSets.main.output
+}
+
+tasks.register('buildMC1219', Jar) {
+    archiveClassifier = '1.21.9'
+    from sourceSets.mc1219.output
+    from sourceSets.main.output
+}
+
+build.dependsOn(buildMC1214, buildMC1219)
+
+tasks.named("jar") {
+    enabled = false
 }
