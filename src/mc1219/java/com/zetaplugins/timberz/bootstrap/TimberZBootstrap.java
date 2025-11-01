@@ -54,6 +54,13 @@ public final class TimberZBootstrap implements PluginBootstrap {
                                     timberEnchantKey
                             ))
                     );
+                    // add to #minecraft:tradeable tag for villager trades
+                    registrar.addToTag(
+                            EnchantmentTagKeys.TRADEABLE,
+                            List.of(TagEntry.valueEntry(
+                                    timberEnchantKey
+                            ))
+                    );
                 })
         );
     }
