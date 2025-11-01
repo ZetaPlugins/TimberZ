@@ -44,10 +44,10 @@ public final class TimberZBootstrap implements PluginBootstrap {
             );
         }));
 
-        // add to #minecraft:in_enchanting_table tag
         context.getLifecycleManager().registerEventHandler(
                 LifecycleEvents.TAGS.preFlatten(RegistryKey.ENCHANTMENT).newHandler(event -> {
                     PreFlattenTagRegistrar<Enchantment> registrar = event.registrar();
+                    // add to #minecraft:in_enchanting_table tag for enchanting table availability
                     registrar.addToTag(
                             EnchantmentTagKeys.IN_ENCHANTING_TABLE,
                             List.of(TagEntry.valueEntry(
