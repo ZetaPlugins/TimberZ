@@ -15,21 +15,15 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this plugin. If not, see <https://www.gnu.org/licenses/>.
- *
- * Note:
- * When running the plugin via the `runServer` Gradle task, a JVM system property
- * `-Dplugin.env=dev` is passed automatically. This enables development-only features
- * such as verbose logging. Builds via `build` do not enable this property and should
- * be treated as release mode.
  */
 
 plugins {
     id 'java'
-    id("xyz.jpenilla.run-paper") version "2.3.1"
+    id("com.gradleup.shadow") version "8.3.0"
 }
 
 group = 'com.zetaplugins'
-version = '1.3.0'
+version = '1.3.1'
 
 repositories {
     mavenCentral()
@@ -85,7 +79,7 @@ dependencies {
     compileOnly 'dev.aurelium:auraskills-api-bukkit:2.2.4'
     implementation "com.fasterxml.jackson.core:jackson-databind:2.16.1"
 
-    implementation "com.zetaplugins:zetacore:1.7.1"
+    shadow "com.zetaplugins:zetacore:1.7.1"
 
     compileOnly "io.papermc.paper:paper-api:1.21.4-R0.1-SNAPSHOT"
 
@@ -100,12 +94,16 @@ tasks.register('buildMC1214', Jar) {
     archiveClassifier = '1.21.4'
     from sourceSets.mc1214.output
     from sourceSets.main.output
+
+    from(configurations.shadow)
 }
 
 tasks.register('buildMC1219', Jar) {
     archiveClassifier = '1.21.9'
     from sourceSets.mc1219.output
     from sourceSets.main.output
+
+    from(configurations.shadow)
 }
 
 build.dependsOn(buildMC1214, buildMC1219)
