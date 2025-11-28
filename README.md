@@ -8,6 +8,7 @@
 [![modrinth](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/available/modrinth_vector.svg)](https://modrinth.com/project/timberz)
 [![discord-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/social/discord-plural_vector.svg)](https://strassburger.org/discord)
 [![gitbook](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/documentation/gitbook_vector.svg)](https://docs.zetaplugins.com/timberz)
+[![generic-plural](https://cdn.jsdelivr.net/npm/@intergrav/devins-badges@3/assets/compact/translate/generic-plural_vector.svg)](https://gitlocalize.com/repo/10274)
 
 TimberZ is a Minecraft plugin that let's you cut down trees in an instant. You can either have it always active, toggleable, make special lumberjack axes or have a custom enchantment.
 
@@ -185,16 +186,6 @@ logToSaplingMap:
   - "STRIPPED_MANGROVE_LOG:MANGROVE_PROPAGULE"
   - "STRIPPED_CHERRY_LOG:CHERRY_SAPLING"
   - "PALE_OAK_LOG:PALE_OAK_SAPLING"
-
-leafBlocks:
-  - "OAK_LEAVES"
-  - "BIRCH_LEAVES"
-  - "SPRUCE_LEAVES"
-  - "JUNGLE_LEAVES"
-  - "ACACIA_LEAVES"
-  - "DARK_OAK_LEAVES"
-  - "MANGROVE_LEAVES"
-  - "CHERRY_LEAVES"
 
 axes:
   - "WOODEN_AXE"
