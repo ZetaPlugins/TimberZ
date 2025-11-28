@@ -94,12 +94,11 @@ loadScripts(document, 'script');</script>
 <section class="class-description" id="class-description">
 <dl class="notes">
 <dt>All Implemented Interfaces:</dt>
-<dd><code>io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner</code>, <code>org.bukkit.command.CommandExecutor</code>, <code>org.bukkit.command.TabCompleter</code>, <code>org.bukkit.command.TabExecutor</code>, <code>org.bukkit.event.Listener</code>, <code>org.bukkit.plugin.Plugin</code></dd>
+<dd><code>io.papermc.paper.plugin.lifecycle.event.LifecycleEventOwner</code>, <code>org.bukkit.command.CommandExecutor</code>, <code>org.bukkit.command.TabCompleter</code>, <code>org.bukkit.command.TabExecutor</code>, <code>org.bukkit.plugin.Plugin</code></dd>
 </dl>
 <hr>
 <div class="type-signature"><span class="modifiers">public final class </span><span class="element-name type-name-label">TimberZ</span>
-<span class="extends-implements">extends org.bukkit.plugin.java.JavaPlugin
-implements org.bukkit.event.Listener</span></div>
+<span class="extends-implements">extends org.bukkit.plugin.java.JavaPlugin</span></div>
 </section>
 <section class="summary">
 <ul class="summary-list">
@@ -130,7 +129,7 @@ implements org.bukkit.event.Listener</span></div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="service/auraskills/AuraSkillsManager.html" title="class in com.zetaplugins.timberz.service.auraskills">AuraSkillsManager</a></code></div>
 <div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getAuraSkillsManager()" class="member-name-link">getAuraSkillsManager</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="service/ConfigService.html" title="class in com.zetaplugins.timberz.service">ConfigService</a></code></div>
+<div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="service/TzConfigService.html" title="class in com.zetaplugins.timberz.service">TzConfigService</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getConfigService()" class="member-name-link">getConfigService</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>@NotNull <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></code></div>
@@ -151,8 +150,8 @@ implements org.bukkit.event.Listener</span></div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="service/TreeFellerService.html" title="class in com.zetaplugins.timberz.service">TreeFellerService</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getTreeFellerService()" class="member-name-link">getTreeFellerService</a>()</code></div>
 <div class="col-last odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
-<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="service/VersionChecker.html" title="class in com.zetaplugins.timberz.service">VersionChecker</a></code></div>
-<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getVersionChecker()" class="member-name-link">getVersionChecker</a>()</code></div>
+<div class="col-first even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code>com.zetaplugins.zetacore.services.updatechecker.UpdateChecker</code></div>
+<div class="col-second even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getUpdateChecker()" class="member-name-link">getUpdateChecker</a>()</code></div>
 <div class="col-last even-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4">&nbsp;</div>
 <div class="col-first odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="service/worldguard/WorldGuardManager.html" title="class in com.zetaplugins.timberz.service.worldguard">WorldGuardManager</a></code></div>
 <div class="col-second odd-row-color method-summary-table method-summary-table-tab2 method-summary-table-tab4"><code><a href="#getWorldGuardManager()" class="member-name-link">getWorldGuardManager</a>()</code></div>
@@ -241,10 +240,6 @@ implements org.bukkit.event.Listener</span></div>
 <h3>getDataPath</h3>
 <div class="member-signature"><span class="annotations">@NotNull
 </span><span class="modifiers">public</span>&nbsp;<span class="return-type">@NotNull <a href="https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/nio/file/Path.html" title="class or interface in java.nio.file" class="external-link">Path</a></span>&nbsp;<span class="element-name">getDataPath</span>()</div>
-<dl class="notes">
-<dt>Specified by:</dt>
-<dd><code>getDataPath</code>&nbsp;in interface&nbsp;<code>org.bukkit.plugin.Plugin</code></dd>
-</dl>
 </section>
 </li>
 <li>
@@ -284,9 +279,9 @@ implements org.bukkit.event.Listener</span></div>
 </section>
 </li>
 <li>
-<section class="detail" id="getVersionChecker()">
-<h3>getVersionChecker</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="service/VersionChecker.html" title="class in com.zetaplugins.timberz.service">VersionChecker</a></span>&nbsp;<span class="element-name">getVersionChecker</span>()</div>
+<section class="detail" id="getUpdateChecker()">
+<h3>getUpdateChecker</h3>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type">com.zetaplugins.zetacore.services.updatechecker.UpdateChecker</span>&nbsp;<span class="element-name">getUpdateChecker</span>()</div>
 </section>
 </li>
 <li>
@@ -298,7 +293,7 @@ implements org.bukkit.event.Listener</span></div>
 <li>
 <section class="detail" id="getConfigService()">
 <h3>getConfigService</h3>
-<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="service/ConfigService.html" title="class in com.zetaplugins.timberz.service">ConfigService</a></span>&nbsp;<span class="element-name">getConfigService</span>()</div>
+<div class="member-signature"><span class="modifiers">public</span>&nbsp;<span class="return-type"><a href="service/TzConfigService.html" title="class in com.zetaplugins.timberz.service">TzConfigService</a></span>&nbsp;<span class="element-name">getConfigService</span>()</div>
 </section>
 </li>
 <li>
