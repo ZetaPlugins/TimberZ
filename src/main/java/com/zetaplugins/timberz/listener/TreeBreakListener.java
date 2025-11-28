@@ -3,6 +3,7 @@ package com.zetaplugins.timberz.listener;
 import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.service.PlayerStateService;
 import com.zetaplugins.timberz.service.TreeFellerService;
+import com.zetaplugins.zetacore.annotations.AutoRegisterListener;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -16,6 +17,7 @@ import java.util.Set;
 
 import static com.zetaplugins.timberz.service.MaterialTypeChecks.isValidAxe;
 
+@AutoRegisterListener
 public final class TreeBreakListener implements Listener {
 
     private final TimberZ plugin;

@@ -1,11 +1,13 @@
 package com.zetaplugins.timberz.listener;
 
 import com.zetaplugins.timberz.TimberZ;
+import com.zetaplugins.zetacore.annotations.AutoRegisterListener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+@AutoRegisterListener
 public final class PlayerJoinListener implements Listener {
     private final TimberZ plugin;
 
@@ -17,7 +19,7 @@ public final class PlayerJoinListener implements Listener {
     public void onPlayerJoin(PlayerJoinEvent event) {
         Player player = event.getPlayer();
 
-        if (player.isOp() && plugin.getConfig().getBoolean("checkForUpdates") && plugin.getVersionChecker().isNewVersionAvailable()) {
+        if (player.isOp() && plugin.getConfig().getBoolean("checkForUpdates") && plugin.getUpdateChecker().isNewVersionAvailable()) {
             player.sendMessage(plugin.getMessageService().getAndFormatMsg(
                     true,
                     "newVersionAvailable",

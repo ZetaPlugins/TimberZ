@@ -72,7 +72,7 @@ public final class TimberZCommand {
     }
 
     private int executeReload(CommandContext<CommandSourceStack> context) {
-        plugin.getConfigService().initConfigs();
+        plugin.getConfigService().clearCache();
         plugin.reloadConfig();
         plugin.getLocalizationService().reload();
         plugin.getTreeDetectionService().fetchLogToLeaveMap();

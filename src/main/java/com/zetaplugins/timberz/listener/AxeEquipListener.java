@@ -2,6 +2,7 @@ package com.zetaplugins.timberz.listener;
 
 import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.service.PlayerStateService;
+import com.zetaplugins.zetacore.annotations.AutoRegisterListener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,6 +15,7 @@ import org.bukkit.inventory.ItemStack;
 import static com.zetaplugins.timberz.service.MaterialTypeChecks.isAxe;
 import static com.zetaplugins.timberz.service.MaterialTypeChecks.isValidAxe;
 
+@AutoRegisterListener
 public final class AxeEquipListener implements Listener {
     private final TimberZ plugin;
     private final PlayerStateService playerStateService;

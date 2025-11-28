@@ -3,6 +3,7 @@ package com.zetaplugins.timberz.listener;
 import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.service.MaterialTypeChecks;
 import com.zetaplugins.timberz.service.PlayerStateService;
+import com.zetaplugins.zetacore.annotations.AutoRegisterListener;
 import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
@@ -15,6 +16,7 @@ import org.bukkit.inventory.ItemStack;
 import java.util.ArrayList;
 import java.util.List;
 
+@AutoRegisterListener
 public class LeafBreakListener implements Listener {
     private final TimberZ plugin;
     private final PlayerStateService playerStateService;

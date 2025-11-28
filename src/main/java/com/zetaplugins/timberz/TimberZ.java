@@ -4,26 +4,30 @@ import com.zetaplugins.timberz.commands.TimberZCommand;
 import com.zetaplugins.timberz.dev.DevMode;
 import com.zetaplugins.timberz.service.*;
 import com.zetaplugins.timberz.service.auraskills.AuraSkillsManager;
-import com.zetaplugins.timberz.service.bstats.Metrics;
+import com.zetaplugins.zetacore.services.bStats.Metrics;
 import com.zetaplugins.timberz.service.papi.PapiExpansion;
-import com.zetaplugins.timberz.service.registrars.EventRegistrar;
 import com.zetaplugins.timberz.service.worldguard.WorldGuardManager;
+import com.zetaplugins.zetacore.services.events.AutoEventRegistrar;
+import com.zetaplugins.zetacore.services.updatechecker.ModrinthUpdateChecker;
+import com.zetaplugins.zetacore.services.updatechecker.UpdateChecker;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
 
 import java.nio.file.Path;
+import java.util.List;
 
-public final class TimberZ extends JavaPlugin implements Listener {
+public final class TimberZ extends JavaPlugin {
+    private final static String PACKAGE_PREFIX = "com.zetaplugins.timberz";
+
     private PlayerStateService playerStateService;
     private MessageService messageService;
     private LocalizationService localizationService;
     private TreeFellerService treeFellerService;
     private TreeDetectionService treeDetectionService;
-    private VersionChecker versionChecker;
-    private ConfigService configService;
+    private UpdateChecker updateChecker;
+    private TzConfigService configService;
     private WorldGuardManager worldGuardManager;
     private AuraSkillsManager auraSkillsManager;
     private final boolean hasWorldGuard = Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
@@ -61,20 +65,20 @@ public final class TimberZ extends JavaPlugin implements Listener {
         getConfig().options().copyDefaults(true);
         saveDefaultConfig();
 
+        this.configService = new TzConfigService(this);
+
         this.localizationService = new LocalizationService(this);
         this.messageService = new MessageService(this);
-        this.versionChecker = new VersionChecker(this, "hjNMOOnF");
-        this.configService = new ConfigService(this);
         this.playerStateService = new PlayerStateService(this);
         this.treeFellerService = new TreeFellerService(this);
         this.treeDetectionService = new TreeDetectionService(this);
 
-        configService.initConfigs();
+        this.updateChecker = new ModrinthUpdateChecker(this, "hjNMOOnF");
+        updateChecker.checkForUpdates(true);
 
-        new EventRegistrar(this).registerListeners();
+        List<String> registeredListeners = new AutoEventRegistrar(this, PACKAGE_PREFIX).registerAllListeners();
+        getLogger().info("Registered " + registeredListeners.size() + " listeners.");
         registerCommands();
-
-        getServer().getPluginManager().registerEvents(this, this);
 
         initializeBStats();
 
@@ -104,9 +108,7 @@ public final class TimberZ extends JavaPlugin implements Listener {
 
     @Override
     public void onDisable() {
-        if (playerStateService != null) {
-            playerStateService.cleanupAll();
-        }
+        if (playerStateService != null) playerStateService.cleanupAll();
         getLogger().info("TimberZ has been disabled!");
     }
 
@@ -140,15 +142,15 @@ public final class TimberZ extends JavaPlugin implements Listener {
         return treeFellerService;
     }
 
-    public VersionChecker getVersionChecker() {
-        return versionChecker;
+    public UpdateChecker getUpdateChecker() {
+        return updateChecker;
     }
 
     public TreeDetectionService getTreeDetectionService() {
         return treeDetectionService;
     }
 
-    public ConfigService getConfigService() {
+    public TzConfigService getConfigService() {
         return configService;
     }
 
