@@ -14,8 +14,18 @@ import java.util.stream.Collectors;
 public final class MaterialTypeChecks {
     private MaterialTypeChecks() {}
 
+    /**
+     * Checks if a material is a leaf block based on the configuration
+     * @param material The material to check
+     * @param blocksConfig The blocks configuration
+     * @return True if the material is a leaf block, false otherwise
+     */
     public static boolean isLeafBlock(Material material, FileConfiguration blocksConfig) {
-        List<String> leafBlocks = blocksConfig.getStringList("leafBlocks");
+        List<String> leafBlocks = blocksConfig.getStringList("logToLeafMap").stream()
+                .filter(entry ->entry.contains(":"))
+                .map(entry -> entry.split(":")[1])
+                .filter(leaf -> !leaf.isEmpty())
+                .toList();
 
         for (String leafBlock : leafBlocks) {
             if (material.toString().equalsIgnoreCase(leafBlock)) {

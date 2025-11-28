@@ -17,7 +17,7 @@ public final class TreeDetectionService {
     private final int MIN_LOGS_REQUIRED;
 
     // Maps log types to their corresponding leaf types
-    private final Map<Material, Material> LOG_TO_LEAF_MAP = new HashMap<>();
+    private final Map<Material, List<Material>> LOG_TO_LEAF_MAP = new HashMap<>();
 
     public TreeDetectionService(TimberZ plugin) {
         this.plugin = plugin;
@@ -45,7 +45,9 @@ public final class TreeDetectionService {
 
             Material logType = Material.getMaterial(parts[0].toUpperCase());
             Material leafType = Material.getMaterial(parts[1].toUpperCase());
-            if (logType != null && leafType != null) LOG_TO_LEAF_MAP.put(logType, leafType);
+            if (logType != null && leafType != null) {
+                LOG_TO_LEAF_MAP.computeIfAbsent(logType, k -> new ArrayList<>()).add(leafType);
+            }
         }
     }
 
@@ -57,9 +59,9 @@ public final class TreeDetectionService {
      */
     public Set<Block> identifyTreeStructure(Block sourceBlock) {
         Material sourceType = sourceBlock.getType();
-        Material matchingLeafType = LOG_TO_LEAF_MAP.get(sourceType);
+        List<Material> matchingLeafTypes = LOG_TO_LEAF_MAP.get(sourceType);
 
-        if (matchingLeafType == null) {
+        if (matchingLeafTypes == null) {
             return Collections.emptySet(); // Not a valid log type
         }
 
@@ -95,7 +97,7 @@ public final class TreeDetectionService {
         }
 
         // Verify the existence of matching leaf blocks
-        boolean hasLeaves = validateLeaves(connectedLogs, matchingLeafType);
+        boolean hasLeaves = validateLeaves(connectedLogs, matchingLeafTypes);
         if (!hasLeaves) {
             return Collections.emptySet(); // No leaves found, not a tree
         }
@@ -207,7 +209,7 @@ public final class TreeDetectionService {
     /**
      * Validate that the connected logs have appropriate leaf blocks nearby.
      */
-    private boolean validateLeaves(Set<Block> connectedLogs, Material leafType) {
+    private boolean validateLeaves(Set<Block> connectedLogs, List<Material> leafTypes) {
         int leafCount = 0;
         Set<Block> checkedBlocks = new HashSet<>();
 
@@ -217,18 +219,14 @@ public final class TreeDetectionService {
                     for (int z = -MAX_SEARCH_RADIUS; z <= MAX_SEARCH_RADIUS; z++) {
                         // Skip blocks we already checked
                         Block checkBlock = log.getRelative(x, y, z);
-                        if (checkedBlocks.contains(checkBlock)) {
-                            continue;
-                        }
+                        if (checkedBlocks.contains(checkBlock)) continue;
 
                         checkedBlocks.add(checkBlock);
 
-                        if (checkBlock.getType() == leafType) {
+                        if (leafTypes.contains(checkBlock.getType())) {
                             leafCount++;
 
-                            if (leafCount >= MIN_LEAVES_REQUIRED) {
-                                return true;
-                            }
+                            if (leafCount >= MIN_LEAVES_REQUIRED) return true;
                         }
                     }
                 }
@@ -252,7 +250,7 @@ public final class TreeDetectionService {
     /**
      * Get the corresponding leaf type for a log type
      */
-    public Material getLeafType(Material logType) {
+    public List<Material> getLeafTypes(Material logType) {
         return LOG_TO_LEAF_MAP.get(logType);
     }
 }

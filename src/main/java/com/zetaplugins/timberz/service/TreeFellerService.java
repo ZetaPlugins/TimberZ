@@ -7,8 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
 import org.bukkit.block.Block;
-import org.bukkit.block.data.BlockData;
-import org.bukkit.block.data.type.Leaves;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -38,13 +36,13 @@ public final class TreeFellerService {
         Material logType = sourceBlock.getType();
 
         // Get corresponding leaf type
-        Material leafType = plugin.getTreeDetectionService().getLeafType(logType);
+        List<Material> leafTypes = plugin.getTreeDetectionService().getLeafTypes(logType);
 
         // Store information about tree type for replanting
         SaplingReplanter.TreeInfo treeInfo = saplingReplanter.analyzeTreeType(sourceBlock, treeBlocks);
 
         // Collect leaf blocks associated with the tree
-        Set<Block> leafBlocks = collectLeaves(treeBlocks, leafType);
+        Set<Block> leafBlocks = collectLeaves(treeBlocks, leafTypes);
 
         // Break logs with animation (one by one with delay)
         breakTreeWithAnimation(player, treeBlocks, tool, durabilityCost);
@@ -76,7 +74,7 @@ public final class TreeFellerService {
     /**
      * Collects leaf blocks that most likely belong to the tree being cut down
      */
-    private Set<Block> collectLeaves(Set<Block> treeBlocks, Material leafType) {
+    private Set<Block> collectLeaves(Set<Block> treeBlocks, List<Material> leafType) {
         Set<Block> leafBlocks = new HashSet<>();
         Set<Block> checkedBlocks = new HashSet<>();
         Set<Block> otherTreeLogs = new HashSet<>();
@@ -99,7 +97,7 @@ public final class TreeFellerService {
 
                         checkedBlocks.add(checkBlock);
 
-                        if (checkBlock.getType() == leafType) {
+                        if (leafType.contains(checkBlock.getType())) {
                             leafBlocks.add(checkBlock);
                         } else if (plugin.getTreeDetectionService().containsLog(checkBlock.getType()) && !treeBlocks.contains(checkBlock)) {
                             // This is a log block that's not part of our tree - potential other tree
