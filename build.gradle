@@ -103,7 +103,9 @@ tasks.register('buildMC1219', Jar) {
     from sourceSets.mc1219.output
     from sourceSets.main.output
 
-    from(configurations.shadow)
+    from{configurations.shadow.collect{zipTree(it)}}
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
 
 build.dependsOn(buildMC1214, buildMC1219)
