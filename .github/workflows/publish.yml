@@ -85,7 +85,7 @@ jobs:
         with:
           token: ${{ secrets.MODRINTH_TOKEN }}
           project: 'hjNMOOnF'
-          version: ${{ github.event.release.tag_name }}-1.21.4
+          version: ${{ github.event.release.tag_name }}
           name: 'TimberZ ${{ github.event.release.tag_name }} (1.21.4-1.21.8)'
           changelog: ${{ github.event.release.body }}
           files: '["build/libs/TimberZ-${{ github.event.release.tag_name }}-1.21.4.jar"]'
@@ -106,7 +106,7 @@ jobs:
         with:
           token: ${{ secrets.MODRINTH_TOKEN }}
           project: 'hjNMOOnF'
-          version: ${{ github.event.release.tag_name }}-1.21.9
+          version: ${{ github.event.release.tag_name }}
           name: 'TimberZ ${{ github.event.release.tag_name }} (>1.21.9)'
           changelog: ${{ github.event.release.body }}
           files: '["build/libs/TimberZ-${{ github.event.release.tag_name }}-1.21.9.jar"]'
