@@ -52,7 +52,7 @@ public final class TreeAnimationHandler {
 
                     // Break the block naturally to drop items
                     Material blockType = block.getType();
-                    block.breakNaturally(player.getInventory().getItemInMainHand());
+                    player.breakBlock(block);
 
                     // Random chance to spawn floating wood chips
                     if (random.nextInt(5) == 0) {
