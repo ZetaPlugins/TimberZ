@@ -42,7 +42,7 @@ public class LeafBreakListener implements Listener {
         ItemStack tool = player.getInventory().getItemInMainHand();
         if (tool.getType() == Material.AIR || !MaterialTypeChecks.isValidAxe(tool, plugin)) return;
 
-        brokenBlock.breakNaturally(tool);
+        player.breakBlock(brokenBlock);
         player.playSound(player.getLocation(), Sound.BLOCK_GRASS_BREAK, 1.0f, 1.0f);
     }
 
