@@ -1,6 +1,7 @@
 package com.zetaplugins.timberz.handler;
 
 import com.zetaplugins.timberz.TimberZ;
+import com.zetaplugins.timberz.service.magnetic.BreakingHelper;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
@@ -51,8 +52,7 @@ public final class TreeAnimationHandler {
                     createBreakEffect(player, block, direction);
 
                     // Break the block naturally to drop items
-                    Material blockType = block.getType();
-                    block.breakNaturally(player.getInventory().getItemInMainHand());
+                    BreakingHelper.breakBlock(block, player, player.getInventory().getItemInMainHand(), true);
 
                     // Random chance to spawn floating wood chips
                     if (random.nextInt(5) == 0) {

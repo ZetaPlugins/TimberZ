@@ -3,6 +3,7 @@ package com.zetaplugins.timberz.service;
 import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.handler.SaplingReplanter;
 import com.zetaplugins.timberz.handler.TreeAnimationHandler;
+import com.zetaplugins.timberz.service.magnetic.BreakingHelper;
 import org.bukkit.Material;
 import org.bukkit.Particle;
 import org.bukkit.Sound;
@@ -49,7 +50,7 @@ public final class TreeFellerService {
 
         // Schedule leaf decay
         if (!leafBlocks.isEmpty() && plugin.getConfig().getBoolean("instantLeafDecay")) {
-            scheduleLeafDecay(leafBlocks);
+            scheduleLeafDecay(leafBlocks, player, tool);
         }
 
         boolean shouldReplant = plugin.getConfig().getBoolean("replant");
@@ -149,7 +150,7 @@ public final class TreeFellerService {
     /**
      * Schedules leaf decay with a natural-looking pattern
      */
-    private void scheduleLeafDecay(Set<Block> leafBlocks) {
+    private void scheduleLeafDecay(Set<Block> leafBlocks, Player player, ItemStack tool) {
         List<Block> sortedLeaves = new ArrayList<>(leafBlocks);
 
         // Sort leaves from bottom to top for more natural decay
@@ -178,8 +179,8 @@ public final class TreeFellerService {
                                 Sound.BLOCK_GRASS_BREAK,
                                 0.6f, pitch);
 
-                        // Break the leaf naturally
-                        leaf.breakNaturally();
+                        // Break the leaf
+                        BreakingHelper.breakBlock(leaf, player, tool, false);
                     }
                 }
             }.runTaskLater(plugin, 5 + random.nextInt(40)); // Random delay between 5-45 ticks

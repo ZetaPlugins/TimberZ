@@ -3,6 +3,7 @@ package com.zetaplugins.timberz.listener;
 import com.zetaplugins.timberz.TimberZ;
 import com.zetaplugins.timberz.service.MaterialTypeChecks;
 import com.zetaplugins.timberz.service.PlayerStateService;
+import com.zetaplugins.timberz.service.magnetic.BreakingHelper;
 import com.zetaplugins.zetacore.annotations.AutoRegisterListener;
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -42,7 +43,7 @@ public class LeafBreakListener implements Listener {
         ItemStack tool = player.getInventory().getItemInMainHand();
         if (tool.getType() == Material.AIR || !MaterialTypeChecks.isValidAxe(tool, plugin)) return;
 
-        brokenBlock.breakNaturally(tool);
+        BreakingHelper.breakBlock(brokenBlock, player, tool, true);
         player.playSound(player.getLocation(), Sound.BLOCK_GRASS_BREAK, 1.0f, 1.0f);
     }
 
