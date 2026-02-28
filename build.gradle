@@ -78,7 +78,7 @@ dependencies {
     compileOnly 'com.sk89q.worldguard:worldguard-bukkit:7.0.13'
     compileOnly 'me.clip:placeholderapi:2.11.6'
     compileOnly 'dev.aurelium:auraskills-api-bukkit:2.2.4'
-    compileOnly 'dev.nyon:magnetic:3.9.1-1.21.6+paper'
+    compileOnly 'dev.nyon:magnetic:3.10.0-1.21.6+paper'
     implementation "com.fasterxml.jackson.core:jackson-databind:2.16.1"
 
     shadow "com.zetaplugins:zetacore:1.7.1"
