@@ -6,6 +6,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class BreakingHelper {
@@ -18,7 +19,7 @@ public class BreakingHelper {
         }
 
         // Create magnetic drop event
-        List<ItemStack> drops = block.getDrops(tool, player).stream().toList();
+        ArrayList<ItemStack> drops = new ArrayList<>(block.getDrops(tool, player));
         dev.nyon.magnetic.DropEvent dropEvent = new dev.nyon.magnetic.DropEvent(drops, new MutableInt(0), player, block.getLocation());
         dropEvent.callEvent();
 
