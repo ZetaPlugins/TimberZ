@@ -39,7 +39,7 @@ public final class TimberZBootstrap implements PluginBootstrap {
                                 .activeSlots(EquipmentSlotGroup.ANY)
                                 .supportedItems(event.getOrCreateTag(ItemTypeTagKeys.AXES))
                                 .primaryItems(event.getOrCreateTag(ItemTypeTagKeys.AXES))
-                                .description(Component.text("Timber"));
+                                .description(Component.translatable("enchantment.timberz.timber", "Timber"));
                     }
             );
         }));

@@ -77,7 +77,7 @@ checkForUpdates: true
 # Set the language to any code found in the "lang" folder (don't add the .yml extension)
 # You can add your own language files. Use https://github.com/ZetaPlugins/TimberZ/tree/main/src/main/resources/lang/en-US.yml as a template
 # If you want to help translating the plugin, please refer to this article: https://docs.zetaplugins.com/#contributing
-#  | en-US | de-DE | pl-PL | ru-RU |
+#  | en-US | de-DE | pl-PL | ru-RU | nl-NL |
 lang: "en-US"
 
 # The accent color of the plugin. This color replaces %ac% in the lang files.
@@ -197,6 +197,35 @@ axes:
 ```
 
 </details>
+
+## Custom Enchantment Translation
+
+The Timber enchantment uses the translation key `enchantment.timberz.timber`. If you want to customize the name displayed to players, you can create or update your server’s resource pack with a custom translation.
+
+### How to Add Custom Translations
+
+Add a language file to your resource pack at `assets/timberz/lang/en_us.json` (or another language code) with the following content:
+
+```json
+{
+  "enchantment.timberz.timber": "Your Custom Name"
+}
+```
+
+For example, if you want to call it "Lumberjack" instead of "Timber":
+
+```json
+{
+  "enchantment.timberz.timber": "Lumberjack"
+}
+```
+
+For detailed information on resource pack structure and how to configure them on your server, refer to:
+
+- [Minecraft Wiki: Resource pack - Directory structure](https://minecraft.wiki/w/Resource_pack#Directory_structure)
+- [Minecraft Wiki: Server.properties - resource-pack](https://minecraft.wiki/w/Server.properties#resource-pack)
+
+Players will then see your custom name for the enchantment in the enchanting table, anvil, and item tooltips.
 
 ## Support
 

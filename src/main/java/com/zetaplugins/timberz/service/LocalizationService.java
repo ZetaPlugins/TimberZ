@@ -10,7 +10,7 @@ import java.util.List;
 
 public final class LocalizationService {
     private final JavaPlugin plugin;
-    public static final List<String> defaultLangs = List.of("en-US", "de-DE");
+    public static final List<String> defaultLangs = List.of("en-US", "de-DE", "pl-PL", "ru-RU", "nl-NL");
 
     private FileConfiguration langConfig;
 

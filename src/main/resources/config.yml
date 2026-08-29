@@ -20,7 +20,7 @@ checkForUpdates: true
 # Set the language to any code found in the "lang" folder (don't add the .yml extension)
 # You can add your own language files. Use https://github.com/ZetaPlugins/TimberZ/tree/main/src/main/resources/lang/en-US.yml as a template
 # If you want to help translating the plugin, please refer to this article: https://docs.zetaplugins.com/#contributing
-#  | en-US | de-DE | pl-PL | ru-RU |
+#  | en-US | de-DE | pl-PL | ru-RU | nl-NL |
 lang: "en-US"
 
 # The accent color of the plugin. This color replaces %ac% in the lang files.
